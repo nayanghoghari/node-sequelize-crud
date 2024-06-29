@@ -1,0 +1,42 @@
+{
+  "name": "easter-demo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start:dev": "cross-env NODE_ENV=development nodemon src/index.js",
+    "dev": "npm run migrate-dev && cross-env NODE_ENV=development nodemon src/index.js",
+    "start": "cross-env NODE_ENV=production node src/index.js",
+    "migrate-dev": "npm run migrate-dev:up && npm run seed-dev:up",
+    "migrate-dev:up": "cross-env NODE_ENV=development npx sequelize-cli db:migrate",
+    "migrate-dev:down": "cross-env NODE_ENV=development npx sequelize-cli db:migrate:down",
+    "seed-dev:up": "cross-env NODE_ENV=development npx sequelize-cli db:seed:all",
+    "seed-dev:down": "cross-env NODE_ENV=development npx sequelize-cli db:seed:undo"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "cross-env": "^7.0.3",
+    "csv-writer": "^1.6.0",
+    "dotenv": "^16.4.5",
+    "envalid": "^8.0.0",
+    "exceljs": "^4.4.0",
+    "express": "^4.19.2",
+    "express-validation": "^4.1.1",
+    "http-errors": "^2.0.0",
+    "json2csv": "6.0.0-alpha.2",
+    "jsonwebtoken": "^9.0.2",
+    "morgan": "^1.10.0",
+    "mysql2": "^3.10.1",
+    "passport": "^0.7.0",
+    "passport-jwt": "^4.0.1",
+    "passport-local": "^1.0.0",
+    "pdfkit": "^0.15.0",
+    "sequelize": "^6.37.3"
+  },
+  "devDependencies": {
+    "sequelize-cli": "^6.6.2"
+  }
+}
