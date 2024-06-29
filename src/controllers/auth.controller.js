@@ -1,11 +1,14 @@
 const { USER_MODEL, ROLE_MODEL, USER_TOKEN_MODEL } = require("../models");
+const { ApiError } = require("../utils/error.util");
 const { generateAccessToken } = require("../utils/jwt.utils");
 const { getSuccessResponse } = require("../utils/response.util");
 
 exports.signUp = async (req, res, next) => {
   try {
     const payload = req.body;
-
+    const { email } = payload;
+    const isUserExists = await USER_MODEL.findOne({ where: { email }})
+    if(isUserExists) throw new ApiError({ message: "User with given email already exists..", statusCode: 409 })
     const role = await ROLE_MODEL.findOne({ where: { name: "user" } });
     const user = await USER_MODEL.create(payload);
 
